@@ -1,0 +1,11 @@
+.vendorDrop li {
+    list-style: none;
+    padding-right: 2em;
+
+}
+.loginButtons li {
+    list-style: none;
+    float: left;
+    padding-left: 1em;
+    padding-right: 2em;
+}

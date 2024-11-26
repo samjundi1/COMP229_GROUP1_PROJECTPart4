@@ -1,0 +1,24 @@
+.centered-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color:#222222;
+}
+
+/* Default font size */
+h4 {
+    font-size: 1.25rem;
+}
+label, .form-control {
+    font-size: 1rem;
+}
+
+/* Adjust font size for smaller screens */
+@media (max-width: 767px) {
+    h4 {
+        font-size: 1.1rem;
+    }
+    label, .form-control {
+        font-size: 0.9rem;
+    }
+}

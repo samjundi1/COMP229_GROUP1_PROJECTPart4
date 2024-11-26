@@ -1,0 +1,80 @@
+/* Global Styles */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Container for the Add Section */
+#add {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    min-height: 100vh; /* Ensures full viewport height */
+    padding: 1rem; /* Added padding for small screens */
+    background-color: #222222; /* Optional: background color */
+}
+
+/* Main Container */
+#container {
+    width: 100%;
+    max-width: 25rem; /* Equivalent to 400px */
+    padding: 1.25rem;
+    text-align: left;
+    background-color: #fff; /* Optional: background color */
+    border-radius: 0.5rem; /* Optional: rounded corners */
+    box-shadow: 0 0.25rem 0.5rem rgba(0, 0, 0, 0.1); /* Optional: container shadow */
+}
+
+/* Form Labels */
+form label {
+    display: block;
+    font-weight: bold;
+    margin: 0.625rem 0 0.3125rem; /* 10px 0 5px */
+    font-size: 1rem;
+}
+
+/* Form Inputs, Selects, and Textareas */
+form input,
+form select,
+form textarea {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 0.0625rem 0.125rem rgba(0, 0, 0, 0.05);
+}
+
+/* Checkbox Container */
+#check {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Error Messages */
+.error {
+    color: red;
+    font-size: 0.9rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Media Queries for Smaller Devices */
+@media (max-width: 480px) {
+    /* Adjust container padding */
+    #container {
+        padding: 1rem;
+    }
+
+    /* Reduce font sizes */
+    form label,
+    form input,
+    form select,
+    form textarea {
+        font-size: 0.95rem;
+    }
+}

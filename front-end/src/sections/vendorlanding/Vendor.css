@@ -1,0 +1,8 @@
+
+.vendorHome{
+  background-color: #222222;
+  min-height: 100vh;
+  padding: 20px;
+  margin-bottom: 0;
+  display: flex;
+}

@@ -1,0 +1,61 @@
+.detailContainer {
+    background-color: #222222;
+    color: white;
+}
+
+.breadcrumb {
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.breadcrumb .breadcrumb-item .text-light {
+    text-decoration: none;
+}
+
+.breadcrumb .breadcrumb-item .text-light:hover {
+    text-decoration: underline;
+}
+
+.related-products-section {
+    margin-top: 30px;
+}
+
+.related-products-section .bg-secondary {
+    background-color: #444; /* Background color for related products */
+    color: white;
+    text-align: center;
+}
+
+.related-products-section .card-img-top {
+    height: 120px;
+    object-fit: cover;
+    border-bottom: 1px solid #444;
+}
+
+.related-products-section .card-body .card-title {
+    font-size: 1rem;
+}
+
+.footer-nav {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.footer-nav .text-light {
+    text-decoration: none;
+}
+
+.footer-nav .text-light:hover {
+    text-decoration: underline;
+}
+.occasion-item {
+    margin-right: 10px; /* Add space between items */
+    padding: 5px; /* Add internal padding */
+    background-color: #333; /* Background color for visibility */
+    border-radius: 4px; /* Rounded corners */
+    color: #fff; /* Text color for contrast */
+    font-size: 14px; /* Adjust font size */
+    display: inline-block; /* Keep items inline */
+  }
+  
