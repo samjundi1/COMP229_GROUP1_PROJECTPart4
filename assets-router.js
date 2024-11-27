@@ -6,14 +6,20 @@ const router = express.Router();
 const imageRegex = /\/.+\.(svg|png|jpg|png|jpeg)$/; // You can add other image formats
 const videoRegex = /\/.+\.(mp4|ogv)$/
 
-//Iterate over the regex patterns and create a route for each
+// Get the correct frontend URL based on the environment
+const frontendUrl = process.env.REACT_FRONTEND || 'http://localhost:3000';
+
+// Iterate over the regex patterns and create a route for each
 router.get(imageRegex, (req, res) => {
     const filePath = req.path;
-    res.redirect(303, `http://localhost:3000/src${filePath}`);
+    // Redirect to the appropriate frontend URL
+    res.redirect(303, `${frontendUrl}/src${filePath}`);
 });
+
 router.get(videoRegex, (req, res) => {
     const filePath = req.path;
-    res.redirect(303, `http://localhost:3000/src${filePath}`);
+    // Redirect to the appropriate frontend URL
+    res.redirect(303, `${frontendUrl}/src${filePath}`);
 });
 
 //Export the router

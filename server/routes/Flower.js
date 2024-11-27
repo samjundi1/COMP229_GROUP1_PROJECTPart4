@@ -21,5 +21,5 @@ router.put('/flowers/:flowerIdCat', flowerController.updateFlowerAndCat);
 // Delete a flower
 router.delete('/flowers/:flowerId', flowerController.deleteFlower);
 // Delete a flower and catalog
-router.delete('/flowers/:flowerIdCat', flowerController.deleteFlowerAndCat);
+router.delete('/flowers/flowerIdCat', flowerController.deleteFlowerAndCat);
 module.exports = router;

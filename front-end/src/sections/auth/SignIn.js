@@ -39,6 +39,9 @@ const SignIn = () => {
             // Store the token and userAccountId in localStorage (optional)
             localStorage.setItem('token', token);
             localStorage.setItem('userAccountId', userAccount._id);
+            localStorage.setItem('userAcctId', userAccount.userAccId);
+            localStorage.setItem('userAccName', userAccount.userAccName);
+            localStorage.setItem('role', userAccount.role);
             // Redirect to the landing page
             navigate('/vendor-main');
         } catch (error) {

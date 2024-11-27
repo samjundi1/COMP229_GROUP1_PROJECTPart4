@@ -19,6 +19,17 @@ mongoose.connect(config.mongoUri, {
 app.listen(config.port, () => {
   console.info(`Server started on the port ${config.port}`);
 });
+const cors = require('cors');
+const reactUri=process.env.REACT_FRONTEND;
+
+app.use(cors({
+  origin: reactUri  ||  'http://localhost:3000', // Allow requests from your React frontend
+  methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE'], // Include DELETE
+  allowedHeaders: ['Content-Type', 'Authorization'], // Include required headers
+}));
+
+
+
 
 // Routes
 const authRoutes = require('./routes/Auth');

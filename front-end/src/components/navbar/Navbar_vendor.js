@@ -17,7 +17,7 @@ function SignedInNav() {
   const { userAccountId, userAccName,userAccId, userRole } = useUserContext(); // Access userAccountId,AccID, Name and role from context
   console.log('userAcountId', userAccountId)
   console.log('userAccName', userAccName)
-  console.log('userAccName', userAccId)
+  console.log('userAccId', userAccId)
   const navigate = useNavigate();
   const handleSignOut = async () => {
     try {

@@ -38,7 +38,7 @@ const AddFlower = () => {
 
             try {
                 // Fetch the vendor using the userAccount _id
-                const response = await fetch("http://localhost:8080/api/vendors/:user_id", {
+                const response = await fetch(`${process.env.REACT_APP_API_URL}/api/vendors/:user_id`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -116,7 +116,7 @@ const AddFlower = () => {
             console.log('Prepared catalog data:', catalogData);
     
             // Send the catalog data to the server
-            const catalogResponse = await fetch('http://localhost:8080/api/flowersCat', {
+            const catalogResponse = await fetch(`${process.env.REACT_APP_API_URL}/api/flowersCat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'

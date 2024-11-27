@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Flower = require('../models/Flower');
 const Catalog = require('../models/Catalog'); //Flower has a refrence in a catalogs
-
+const Joi = require('joi');
 exports.createFlowerAddToCat = async (req, res) => {
     const session = await mongoose.startSession(); // Start a session for transaction
     session.startTransaction();
@@ -152,49 +152,64 @@ exports.updateFlower = async (req, res) => {
     }
 };
 // Delete a flower and from catalogs
-exports.deleteFlowerAndCat = async (req, res) => {
-    try {
-        const { flowerId } = req.body;
 
-        // Check if flowerId is a valid ObjectId
-        if (!mongoose.Types.ObjectId.isValid(flowerId)) {
+
+
+exports.deleteFlowerAndCat = async (req, res) => {
+    // Validate request body
+    const schema = Joi.object({
+        _id: Joi.string().required(),
+        flowerId: Joi.string().required(),
+    });
+
+    const { error } = schema.validate(req.body);
+    if (error) {
+        return res.status(400).json({ error: error.details[0].message });
+    }
+
+    const { _id, flowerId } = req.body;
+
+    try {
+        // Validate ObjectId
+        if (!mongoose.Types.ObjectId.isValid(_id)) {
             return res.status(400).json({ error: 'Invalid flower ID format.' });
         }
 
-        // Convert flowerId to ObjectId
-        const flowerObjectId = mongoose.Types.ObjectId(flowerId);
+        const flowerObjectId = new mongoose.Types.ObjectId(_id);
 
-        // Check if the flower exists
-        const flower = await Flower.findById(flowerObjectId);
-        if (!flower) {
-            return res.status(404).json({ error: 'Flower not found.' });
-        }
-
-        // Start a session for an atomic transaction
         const session = await mongoose.startSession();
         session.startTransaction();
+
         try {
-            // Delete flower from the flowers collection
-            await Flower.findByIdAndDelete(flowerObjectId, { session });
+            const deletedFlower = await Flower.findByIdAndDelete(flowerObjectId, { session });
 
-            // Delete related catalog entries where flowerId matches the ObjectId
-            await Catalog.deleteMany({ flower: flowerObjectId }, { session });
+            if (!deletedFlower) {
+                await session.abortTransaction();
+                return res.status(404).json({ error: 'Flower not found.' });
+            }
 
-            // Commit transaction
+            const catalogDeleteResult = await Catalog.deleteMany({ flower: flowerObjectId }, { session });
+
             await session.commitTransaction();
-            session.endSession();
 
-            return res.status(200).json({ message: 'Flower and related catalogs deleted successfully.' });
+            return res.status(200).json({
+                message: `Flower with ID ${flowerId} and related catalogs deleted successfully.`,
+                deletedFlowerCount: 1,
+                deletedCatalogCount: catalogDeleteResult.deletedCount,
+            });
         } catch (error) {
-            // Rollback transaction on error
             await session.abortTransaction();
+            console.error('Delete transaction error:', error);
+            return res.status(500).json({ error: 'Failed to delete flower and catalogs.' });
+        } finally {
             session.endSession();
-            throw error;
         }
     } catch (error) {
+        console.error('Unexpected error:', error);
         return res.status(500).json({ error: error.message });
     }
 };
+
 // updated d 22.NOV
 /*exports.deleteFlowerAndCat = async (req, res) => {
     try {
